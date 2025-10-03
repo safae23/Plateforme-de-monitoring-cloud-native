@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulaire - Calcul âge et poids</title>
+</head>
+<body>
+    <h2>Entrez vos informations :</h2>
+    <form method="post">
+        Nom : <input type="text" name="name"><br><br>
+        Date de naissance : <input type="date" name="birthdate"><br><br>
+        Taille (cm) : <input type="number" name="height"><br><br>
+        <input type="submit" value="Calculer">
+    </form>
+
+    {% if result %}
+        <h3>{{ result }}</h3>
+    {% endif %}
+</body>
+</html>

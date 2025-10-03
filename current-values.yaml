@@ -1,0 +1,111 @@
+alertmanager:
+  alertmanagerSpec:
+    configReloaderImage:
+      repository: quay.io/prometheus-operator/prometheus-config-reloader
+      tag: v0.82.2
+    image:
+      repository: quay.io/prometheus/alertmanager
+      tag: v0.28.1
+    replicaCount: 1
+    replicas: 1
+    securityContext:
+      fsGroup: 2000
+      runAsUser: 1000
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+  config:
+    global:
+      resolve_timeout: 5m
+      smtp_auth_password: sccazcxzownsidzl
+      smtp_auth_username: chouaisafae650@gmail.com
+      smtp_from: chouaisafae650@gmail.com
+      smtp_require_tls: true
+      smtp_smarthost: smtp.gmail.com:587
+    receivers:
+    - email_configs:
+      - headers:
+          subject: '[Alerte CRITIQUE] {{ .CommonLabels.alertname }}'
+        send_resolved: true
+        to: chouaisafae650@gmail.com
+      name: email-critical
+    - email_configs:
+      - headers:
+          subject: '[Alerte WARNING] {{ .CommonLabels.alertname }}'
+        send_resolved: true
+        to: chouaisafae650@gmail.com
+      name: email-warning
+    - email_configs:
+      - headers:
+          subject: '[Alerte Autre] {{ .CommonLabels.alertname }}'
+        send_resolved: true
+        to: chouaisafae650@gmail.com
+      name: email-default
+    route:
+      group_by:
+      - alertname
+      receiver: email-default
+      routes:
+      - matchers:
+        - role="alert-rules"
+        - severity="critical"
+        receiver: email-critical
+      - matchers:
+        - role="alert-rules"
+        - severity="warning"
+        receiver: email-warning
+  enabled: true
+  fullnameOverride: monitoring-kube-prometheus-alertmanager
+grafana:
+  admin:
+    existingSecret: grafana-admin-secret
+    passwordKey: admin-password
+    userKey: admin-user
+  initChownData:
+    enabled: false
+  persistence:
+    enabled: true
+    existingClaim: grafana-storage
+    initChownData:
+      enabled: false
+    storageClassName: local-path
+  podSecurityContext:
+    fsGroup: 472
+    initChownData:
+      enabled: false
+    runAsGroup: 472
+    runAsUser: 472
+  replicas: 1
+prometheus:
+  prometheusSpec:
+    alerting:
+      alertmanagers:
+      - name: monitoring-kube-prometheus-alertmanager
+        namespace: monitoring
+        port: web
+    maximumStartupDurationSeconds: 300
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 4Gi
+      requests:
+        cpu: 500m
+        memory: 2Gi
+    retention: 15d
+    ruleSelector:
+      matchLabels:
+        role: alert-rules
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Gi
+          storageClassName: local-path
