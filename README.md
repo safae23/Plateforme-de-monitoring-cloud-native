@@ -108,29 +108,6 @@ Une **mini application microservices** a été développée pour tester la plate
 * Mise en œuvre d’une **infrastructure cloud-native modulaire et scalable**.
 
 ---
-
-## Structure du dépôt
-
-```
-plateforme-monitoring-cloudnative/
-├── microservices/
-│   ├── api-gateway/
-│   ├── service-age/
-│   ├── service-poids/
-├── kubernetes/
-│   ├── prometheus-values.yaml
-│   ├── alertmanager-config.yaml
-│   ├── grafana-config.yaml
-├── tests/
-│   ├── test_age.py
-│   ├── test_poids.py
-│   ├── test_integration.py
-├── README.md
-└── requirements.txt
-```
-
----
-
 ## Résultats et perspectives
 
 Le projet a permis de :
