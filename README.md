@@ -7,13 +7,11 @@ L’objectif est de disposer d’une **solution open-source** capable de :
 * Collecter les métriques système et applicatives,
 * Visualiser ces données en temps réel via des dashboards interactifs,
 * Détecter automatiquement les anomalies à l’aide d’un système d’alertes,
-* Et fournir une base extensible pour des intégrations futures (logs, traces, CI/CD...).
-
 ---
 
 ## Architecture technique
 
-L’architecture repose sur un cluster **K3d (Kubernetes léger)** exécuté dans **Docker Desktop**, et intègre plusieurs composants :
+L’architecture repose sur un cluster **K3d (Kubernetes léger)** exécuté dans **Docker**, et intègre plusieurs composants :
 
 * **Prometheus** : collecte et stocke les métriques.
 * **Grafana** : visualisation des données en dashboards interactifs.
@@ -33,7 +31,7 @@ L’architecture repose sur un cluster **K3d (Kubernetes léger)** exécuté dan
 * K3d
 * Helm
 * Kubectl
-* VS Code (ou tout IDE supportant YAML/Kubernetes)
+* VS Code 
 
 ### 2. Installation du cluster
 
@@ -104,7 +102,7 @@ Une **mini application microservices** a été développée pour tester la plate
 
 * Importance du **monitoring dans les environnements conteneurisés**.
 * Maîtrise de l’écosystème **Prometheus / Grafana / Alertmanager**.
-* Compréhension des **bonnes pratiques DevOps** (supervision, alerting, CI/CD).
+* Compréhension des **bonnes pratiques DevOps** (supervision, alerting).
 * Mise en œuvre d’une **infrastructure cloud-native modulaire et scalable**.
 
 ---
@@ -115,7 +113,3 @@ Le projet a permis de :
 * Déployer une **stack de monitoring fonctionnelle** et extensible,
 * Mettre en place un **système d’alerte automatique par e-mail**,
 * Construire des **dashboards dynamiques** pour le suivi temps réel,
-* Préparer la plateforme à des **intégrations futures** (Loki, Tempo, CI/CD).
-
-Je peux ensuite te livrer la **version finale prête à copier-coller** dans ton dépôt GitHub.
-Tu veux que je l’ajuste dans ce sens ?
